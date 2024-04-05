@@ -23,7 +23,7 @@ Use this command to build the app:
 
 ## AI Providers
 
-The application was tested with 3 AI providers: OpenAI, Azure OpenAI and AWS Bedrock based on Llama2. Choose the one you preferred and enable it based on the options below.
+The application was tested with 3 AI providers: OpenAI, Azure OpenAI, AWS Bedrock based on Llama2, and Ollama. Choose the one you preferred and enable it based on the options below.
 
 ### OpenAI
 
@@ -38,7 +38,7 @@ export OPENAI_API_KEY=xxxxxx
 ```
 Set `newsletter.ai.model` to `openai` in `application.properties`.
 
-Only uncomment `spring-ai-openai-spring-boot-starter` in `pom.xml`, comment the other two spring-ai dependencies.
+Only uncomment `spring-ai-openai-spring-boot-starter` in `pom.xml`, comment the other three spring-ai dependencies.
 
 ### AWS Bedrock based on Llama2
 It appears that currently this model is only available at us-east-1.
@@ -55,7 +55,7 @@ Change the propety `spring.ai.bedrock.llama2.chat.enabled` to `true` in `applica
 
 Set `newsletter.ai.model` to `bedrock-llama2` in `application.properties`.
 
-Only uncomment `spring-ai-bedrock-ai-spring-boot-starter` in `pom.xml`, comment the other two spring-ai dependencies.
+Only uncomment `spring-ai-bedrock-ai-spring-boot-starter` in `pom.xml`, comment the other three spring-ai dependencies.
 
 ### Azure OpenAI
 Enable the Azure OpenAI service in the Azure portal. This requires to fill out a form at the moment, which usually takes at most 24 hours.
@@ -73,6 +73,46 @@ Set `newsletter.ai.model` to `azure-openai` in `application.properties`.
 
 Only uncomment `spring-ai-azure-openai-spring-boot-starter` in `pom.xml`, comment the other two spring-ai dependencies.
 
+
+### Ollama (run locally)
+The application relies on [Ollama](https://ollama.ai) for providing LLMs. You can run Ollama locally on your laptop (macOS, Linux or Windows-preview).
+
+First make sure you have [Ollama](https://ollama.ai) installed on your laptop (macOS, Linux or Windows-preview).
+
+For macOS, the simplest is to use `brew`, e.g.
+
+```
+brew install ollama
+```
+
+Start the `ollama` process, e.g.
+
+```
+ollama start
+```
+
+Run the model, e.g. 
+
+```
+ollama run llama2
+```
+
+This will download the LLM first time you run it.
+
+The most popular LLM is `llama2` - see [documentation](https://ollama.com/library/llama2) and is about 3.8GB download.
+
+The default model for Spring AI is `mistral`, and can be modified with `spring.ai.ollama.chat.options.model` property.
+For more details, see [Spring AI Ollama documentation](https://docs.spring.io/spring-ai/reference/api/clients/ollama-chat.html).
+
+To get the list of available models, please refer to [Ollama documentation](https://ollama.com/library).
+
+Default `ollama` serving port locally is `11434`, surprisingly :)
+
+Only uncomment `spring-ai-ollama-spring-boot-starter` in `pom.xml`, comment any other Spring AI LLM service starters.
+
+
+## Run the application
+
 Use this command to run the app on your local workstation:
 
 ```shell
@@ -80,6 +120,9 @@ Use this command to run the app on your local workstation:
 ```
 
 The app is available at http://localhost:8080.
+
+
+
 
 ## Contribute
 
